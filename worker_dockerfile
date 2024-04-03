@@ -1,0 +1,19 @@
+# Use a Node.js base image
+FROM node:latest
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package.json ./
+COPY package-lock.json ./
+
+# Install app dependencies
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Expose port and start application
+EXPOSE 8080
+CMD [ "node", "worker.js" ]
