@@ -1,0 +1,25 @@
+{
+  "name": "your-react-app",
+  "version": "1.0.0",
+  "description": "Your React App Description",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",  // Command to start the development server
+    "build": "react-scripts build",  // Command to build the app for production
+    "test": "react-scripts test",    // Command to run tests
+    "eject": "react-scripts eject"   // Command to eject from create-react-app (optional)
+  },
+  "author": "Your Name",
+  "license": "MIT",   // License type
+  "dependencies": {
+    // Add dependencies required by your React app here
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    // Other dependencies...
+  },
+  "devDependencies": {
+    // Add dev dependencies here (e.g., for testing, linting, etc.)
+    "react-scripts": "^5.0.0" // This is a development dependency required for building and running the app
+    // Other dev dependencies...
+  }
+}
