@@ -1,23 +1,18 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use the official Python 3.9 image from Docker Hub
+FROM python:3.9
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the Python application and requirements file into the container
+COPY app.py /app/
+COPY requirements.txt /app/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir Flask mysql-connector-python requests
+# Install any dependencies
+RUN pip install -r requirements.txt
 
-# Make port 5000 available to the world outside this container
+# Expose the Flask port
 EXPOSE 5000
 
-# Define environment variable
-ENV MYSQL_ROOT_PASSWORD=password
-ENV MYSQL_DATABASE=shms_database
-ENV MYSQL_USER=shms_user
-ENV MYSQL_PASSWORD=shms_password
-
-# Run app.py when the container launches
+# Run the Flask application
 CMD ["python", "app.py"]
