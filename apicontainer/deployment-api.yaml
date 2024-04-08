@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: your-registry/api:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: your_mysql_root_password
+        - name: MYSQL_DATABASE
+          value: shms
