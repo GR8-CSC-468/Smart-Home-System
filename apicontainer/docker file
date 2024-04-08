@@ -1,23 +1,23 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Install MySQL client
-RUN apt-get update && apt-get install -y mysql-client
-
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install Flask and MySQL connector
-RUN pip install --no-cache-dir Flask mysql-connector-python
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir Flask mysql-connector-python requests
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
 # Define environment variable
-ENV NAME api
+ENV MYSQL_ROOT_PASSWORD=password
+ENV MYSQL_DATABASE=shms_database
+ENV MYSQL_USER=shms_user
+ENV MYSQL_PASSWORD=shms_password
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
