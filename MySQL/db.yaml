@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
-  namespace: mysql-space   # Specify the namespace here
+  namespace: mysql-space   
 spec:
   replicas: 3
   selector:
