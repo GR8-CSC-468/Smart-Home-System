@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: your-registry/api:latest  
+        image: ighost007/smart-home-api:latest 
         ports:
         - containerPort: 5000
         env:
