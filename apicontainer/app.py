@@ -6,16 +6,16 @@ import requests
 app = Flask(__name__)
 
 # Connect to the MySQL database using environment variables
-db = mysql.connector.connect(
-    host="mysql",
-    user=os.getenv("MYSQL_USER", "shms_user"),
-    password=os.getenv("MYSQL_PASSWORD", "shms_password"),
-    database=os.getenv("MYSQL_DATABASE", "shms_database")
-)
-
+db_config = {
+    "host": os.getenv("MYSQL_HOST", "mysql"),
+    "user": os.getenv("MYSQL_USER", "shms_user"),
+    "password": os.getenv("MYSQL_PASSWORD", "shms_password"),
+    "database": os.getenv("MYSQL_DATABASE", "shms_database")
+}
+db = mysql.connector.connect(**db_config)
 cursor = db.cursor()
 
-IFTTT_KEY = "b9F_eA1hMb2duIm8d3fzJc0GXjaL_YVaaYv3c8TcSIx"  # Your IFTTT key
+IFTTT_KEY = "get a key from IFTTT" 
 
 @app.route("/trigger-scenario", methods=["POST"])
 def trigger_scenario():
@@ -44,6 +44,15 @@ def trigger_scenario():
 
         elif scenario == "magic_evening":
             # Add logic for magic evening scenario
+            # For example, turn on soft lights and play relaxing music
+            response_soft_light = requests.post(f"https://maker.ifttt.com/trigger/turn_soft_lights/with/key/{IFTTT_KEY}")
+            if response_soft_light.status_code != 200:
+                return jsonify({"message": "Failed to turn on soft lights"}), 500
+
+            response_music = requests.post(f"https://maker.ifttt.com/trigger/play_relaxing_music/with/key/{IFTTT_KEY}")
+            if response_music.status_code != 200:
+                return jsonify({"message": "Failed to play relaxing music"}), 500
+
             return jsonify({"message": "Magic evening scenario triggered successfully"})
 
         else:
