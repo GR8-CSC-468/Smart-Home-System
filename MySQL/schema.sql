@@ -67,6 +67,7 @@ VALUES
 ('Water Heater', 'Appliance', 'off', 1),    -- Assuming user2 owns the water heater
 ('Thermostat', 'Climate Control', 'off', 1); -- Assuming user1 owns the thermostat
 ('Shower', 'Appliance', 'off', 1);
+('Lights', 'Brightness Control', 'off',1);
 
 INSERT INTO Schedules (UserID, DeviceID, Task, TaskTime, IsActive)
 VALUES
