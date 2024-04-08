@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
+import os
 import mysql.connector
 import requests
 
 app = Flask(__name__)
 
-# Connect to the MySQL database
+# Connect to the MySQL database using environment variables
 db = mysql.connector.connect(
     host="mysql",
-    user="root",
-    password="your_mysql_root_password",
-    database="shms"
+    user=os.getenv("MYSQL_USER", "shms_user"),
+    password=os.getenv("MYSQL_PASSWORD", "shms_password"),
+    database=os.getenv("MYSQL_DATABASE", "shms_database")
 )
 
 cursor = db.cursor()
