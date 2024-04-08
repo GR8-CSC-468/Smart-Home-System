@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: your-registry/api:latest  # Update with your image path
+        image: your-registry/api:latest  
         ports:
         - containerPort: 5000
         env:
