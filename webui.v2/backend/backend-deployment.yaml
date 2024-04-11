@@ -1,0 +1,21 @@
+# backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shms-backend
+  namespace: web-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shms-backend
+  template:
+    metadata:
+      labels:
+        app: shms-backend
+    spec:
+      containers:
+      - name: shms-backend
+        image: yourdockerhubusername/shms-backend
+        ports:
+        - containerPort: 3000
