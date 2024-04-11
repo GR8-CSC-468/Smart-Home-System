@@ -1,0 +1,21 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shms-frontend
+  namespace: web-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shms-frontend
+  template:
+    metadata:
+      labels:
+        app: shms-frontend
+    spec:
+      containers:
+      - name: shms-frontend
+        image: yourdockerhubusername/shms-frontend
+        ports:
+        - containerPort: 80
