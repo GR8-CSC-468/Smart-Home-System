@@ -2,7 +2,7 @@
 FROM node:latest
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /rng_hash_app
 
 # Copy package.json and package-lock.json
 COPY package.json ./
