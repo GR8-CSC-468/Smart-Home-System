@@ -14,7 +14,7 @@ spec:
         app: mysql-space
     spec:
       containers:
-      - name: myapp-container
+      - name: shms-db
         image: swelb/swelb:latest
         ports:
         - containerPort: 3306
