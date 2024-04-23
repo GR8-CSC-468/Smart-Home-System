@@ -7,8 +7,8 @@ ENV MYSQL_DATABASE=shms_database
 ENV MYSQL_USER=shms_user
 ENV MYSQL_PASSWORD=shms_password
 
-# Copy the SQL schema script into the container
-COPY ./schema.sql /docker-entrypoint-initdb.d/
+# Copy the SQL init script into the container
+COPY ./init.sql /docker-entrypoint-initdb.d/
 
 # Expose MySQL port
 EXPOSE 3306
