@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: sql-shms
-        image: swelb/sql-image:2.0
+        image: swelb/sql-image:1.0
         ports:
         - containerPort: 3306
