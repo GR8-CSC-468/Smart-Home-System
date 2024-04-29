@@ -2,12 +2,17 @@
 FROM node:latest as build-stage
 WORKDIR /app
 
-# Copy and install frontend dependencies
+# Copy package.json and package-lock.json from the frontend directory
 COPY frontend/package*.json ./
+
+# Install npm dependencies
 RUN npm install
 
-# Copy the frontend source code
+# Copy the frontend source code (excluding node_modules and potentially other files as defined in .dockerignore)
 COPY frontend/ .
+
+# Copy the public directory from the correct location
+COPY app/public /app/public
 
 # Build the frontend static files
 RUN npm run build
