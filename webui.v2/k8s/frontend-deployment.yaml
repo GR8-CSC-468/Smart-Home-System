@@ -3,7 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shms-frontend
-  namespace: web-service
+  namespace: webuiv2
+  labels:
+    app: shms-frontend
 spec:
   replicas: 1
   selector:
@@ -16,6 +18,7 @@ spec:
     spec:
       containers:
       - name: shms-frontend
-        image: yourdockerhubusername/shms-frontend
+        image: ighost007/shms-frontend:latest  # Update the image name here
         ports:
         - containerPort: 80
+        
