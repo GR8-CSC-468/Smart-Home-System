@@ -1,22 +1,8 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-service
-  namespace: mysql-space
-spec:
-  ports:
-  - port: 3306
-  selector:
-    app: mysql
-  clusterIP: None
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deployment
-  namespace: mysql-space
-  labels:
-    app: mysql
+  namespace: sqlserv
 spec:
   replicas: 1
   selector:
@@ -30,17 +16,17 @@ spec:
       containers:
       - name: mysql
         image: ighost007/custom-mysql:latest
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "password"
-        - name: MYSQL_DATABASE
-          value: "shms_db"
-        - name: MYSQL_USER
-          value: "shms_admin"
-        - name: MYSQL_PASSWORD
-          value: "shms_password"
         ports:
         - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "shms_password"
+        - name: MYSQL_DATABASE
+          value: "shms_database"
+        - name: MYSQL_USER
+          value: "shms_user"
+        - name: MYSQL_PASSWORD
+          value: "shms_password"
         volumeMounts:
         - name: mysql-storage
           mountPath: /var/lib/mysql

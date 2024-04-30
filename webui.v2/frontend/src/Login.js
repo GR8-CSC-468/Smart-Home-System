@@ -1,43 +1,37 @@
+// Login.js
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css'; // Updated to use Login.css
+import { useHistory } from 'react-router-dom';
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+const Login = () => {
+    const [credentials, setCredentials] = useState({
+        username: '',
+        password: ''
+    });
+    const history = useHistory();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3000/login', { email, password });
-      if (response.status === 200) {
-        navigate('/dashboard');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
+    const handleChange = (e) => {
+        setCredentials({...credentials, [e.target.name]: e.target.value});
+    };
 
-  const handleTemporaryAccess = () => {
-    navigate('/dashboard');
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://clnodevm150-1.clemson.cloudlab.us/login', credentials);
+            alert('Login successful');
+            history.push('/dashboard'); // Redirect to dashboard on success
+        } catch (error) {
+            alert('Login failed: ' + error.response.data.message);
+        }
+    };
 
-  return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
-      <Link to="/signup" className="link">Don't have an account? Signup</Link>
-      <button type="button" onClick={handleTemporaryAccess}>Temporary</button>
-    </div>
-  );
-}
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="username" value={credentials.username} onChange={handleChange} placeholder="Username" required />
+            <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" required />
+            <button type="submit">Log In</button>
+        </form>
+    );
+};
 
 export default Login;
