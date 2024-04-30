@@ -1,4 +1,6 @@
 -- Populate Tables
+USE shms_database;
+
 
 INSERT INTO Users (Username, HashedPassword, Email, UserRole)
 VALUES
