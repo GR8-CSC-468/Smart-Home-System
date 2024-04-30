@@ -1,4 +1,6 @@
 -- Create Tables
+USE shms_database;
+
 
 CREATE TABLE Users (
  UserID INT AUTO_INCREMENT PRIMARY KEY,
