@@ -10,10 +10,10 @@ app.use(bodyParser.json());
 
 // Environment variables for database configuration
 const dbConfig = {
-  host: process.env.DB_HOST || 'shms-db',
-  user: process.env.DB_USER || 'shms_user',
-  password: process.env.DB_PASSWORD || 'shms_password',
-  database: process.env.DB_NAME || 'shms_database'
+  host: process.env.SHMS_DB_HOST || 'shms-db',
+  user: process.env.SHMS_DB_USER || 'shms_user',
+  password: process.env.SHMS_DB_PASSWORD || 'shms_password',
+  database: process.env.SHMS_DB_NAME || 'shms_database'
 };
 
 let db;
