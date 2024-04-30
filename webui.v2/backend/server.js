@@ -10,10 +10,10 @@ app.use(bodyParser.json());
 
 // Environment variables for database configuration
 const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  host: process.env.DB_HOST || 'shms-db',
+  user: process.env.DB_USER || 'shms_user',
+  password: process.env.DB_PASSWORD || 'shms_password',
+  database: process.env.DB_NAME || 'shms_database'
 };
 
 let db;
@@ -29,6 +29,9 @@ let db;
 
 app.post('/signup', async (req, res) => {
   const { username, password, address } = req.body;
+  if (!username || !password) {
+    return res.status(400).send({ message: 'Username and password are required' });
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
   try {
     const [result] = await db.execute(
@@ -43,6 +46,9 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send({ message: 'Username and password are required' });
+  }
   try {
     const [users] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
     if (users.length === 0) {
@@ -53,7 +59,7 @@ app.post('/login', async (req, res) => {
     if (isMatch) {
       res.send({ message: 'Login successful' });
     } else {
-      res.status(401).send({ message: 'Login failed' });
+      res.status(401).send({ message: 'Incorrect password' });
     }
   } catch (error) {
     res.status(500).send({ message: 'Error logging in', error: error.message });
@@ -64,3 +70,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
