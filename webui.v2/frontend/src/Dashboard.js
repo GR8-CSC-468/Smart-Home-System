@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './Dashboard.css'; // Import custom CSS file for styling
+import React from 'react';
+import './Dashboard.css';
 
-function Dashboard() {
-  const [scenario, setScenario] = useState('');
+function Dashboard({ username }) {
+  // Example URLs - replace with your actual URLs
+  const urls = {
+    lights: "https://maker.ifttt.com/trigger/turn_lights/with/key/b9F_eA1hMb2duIm8d3fzJc0GXjaL_YVaaYv3c8TcSIx",
+    vacuum: "https://maker.ifttt.com/trigger/start_vacuum/with/key/b9F_eA1hMb2duIm8d3fzJc0GXjaL_YVaaYv3c8TcSIx",
+    speak: "http://example.com/speak"
+  };
 
-  const handleScenario = async (selectedScenario) => {
-    setScenario(selectedScenario);
-    try {
-      // Replace with your actual scenario API endpoint
-      const response = await axios.post('http://localhost:3000/scenario', { scenario: selectedScenario });
-      if (response.status === 200) {
-        // Play the audio file returned by the API
-        const audio = new Audio(response.data.audioUrl);
-        audio.play();
-      }
-    } catch (error) {
-      console.error('Scenario execution failed:', error);
-    }
+  const openInNewTab = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="dashboard-container page-transition">
-      <h2>Dashboard</h2>
-      <p>Select a scenario:</p>
-      <button onClick={() => handleScenario('magic_morning')} className="button">Magic Morning</button>
-      <button onClick={() => handleScenario('magic_evening')} className="button">Magic Evening</button>
-      <p>Selected scenario: {scenario}</p>
+    <div className="dashboard">
+      <div className="dashboard-header">
+        <span>Welcome, {username}!</span>
+      </div>
+      <div className="dashboard-body">
+        <div className="status-panel">
+          <h2>Status</h2>
+          <p>null</p>
+        </div>
+        <div className="automation-panel">
+          <h2>Automation</h2>
+          <button onClick={() => openInNewTab(urls.lights)}>Turn on the Lights</button>
+          <button onClick={() => openInNewTab(urls.vacuum)}>Vacuum</button>
+          <button onClick={() => openInNewTab(urls.speak)}>Speak</button>
+        </div>
+      </div>
     </div>
   );
 }
