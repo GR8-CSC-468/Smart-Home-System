@@ -4,9 +4,10 @@ metadata:
   name: shms-backend
   namespace: webuiv2
 spec:
-  selector:
-    app: shms-backend  # This should match the label in your deployment
+  type: ClusterIP
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3000  # Make sure this matches the exposed port in your deployment
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: shms-backend

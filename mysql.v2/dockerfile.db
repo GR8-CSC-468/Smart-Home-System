@@ -1,0 +1,16 @@
+# Use the official MySQL image as the base image
+FROM mysql:5.7
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=password    # Set the root password
+ENV MYSQL_DATABASE=shms_db          # Set the database name
+ENV MYSQL_USER=shms_admin           # Set the database user
+ENV MYSQL_PASSWORD=shms_password    # Set the database user password
+
+# Add the SQL scripts for initializing your database
+ADD init.sql /docker-entrypoint-initdb.d
+ADD populate.sql /docker-entrypoint-initdb.d
+
+# Expose port 3306 for database connections
+EXPOSE 3306
+

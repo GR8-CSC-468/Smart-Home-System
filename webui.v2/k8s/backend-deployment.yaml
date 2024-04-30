@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: shms-backend
   namespace: webuiv2
-  labels:
-    app: shms-backend
 spec:
   replicas: 1
   selector:
@@ -17,6 +15,17 @@ spec:
     spec:
       containers:
       - name: shms-backend
-        image: ighost007/shms-backend:latest  # Update the image name here
+        image: ighost007/shms-backend:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql-service.mysql-space
+        - name: DB_USER
+          value: shms_admin
+        - name: DB_PASSWORD
+          value: shms_password
+        - name: DB_NAME
+          value: shms_db
+        - name: PORT
+          value: "3000"

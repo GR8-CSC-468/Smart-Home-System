@@ -1,5 +1,5 @@
 # Use the official Node.js base image
-FROM node:latest
+FROM node:14
 
 # Set the working directory in the Docker container
 WORKDIR /app
@@ -7,15 +7,14 @@ WORKDIR /app
 # Copy the package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies, ensuring they are cached unless package.json changes
 RUN npm install
 
-# Copy the backend application source files into the Docker container
+# Copy the rest of the backend application source files into the Docker container
 COPY . .
 
-# Your backend application should expose a port so it's accessible
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Start the backend application
+# Define the command to run your app
 CMD ["node", "server.js"]
-

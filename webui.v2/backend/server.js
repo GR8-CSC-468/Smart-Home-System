@@ -1,40 +1,66 @@
 const express = require('express');
-const cors = require('cors');
+const mysql = require('mysql2/promise');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3000;
-
 app.use(cors());
 app.use(bodyParser.json());
 
-// Mock database for demonstration purposes
-let users = [];
+// Environment variables for database configuration
+const dbConfig = {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+};
 
-app.post('/signup', (req, res) => {
-  const { email, password, address } = req.body;
-  // In a real application, you should hash the password and store it securely
-  const newUser = { email, password, address };
-  users.push(newUser);
-  res.status(201).json({ message: 'User created successfully', user: newUser });
-});
+let db;
 
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  const user = users.find(u => u.email === email && u.password === password);
-  if (user) {
-    res.status(200).json({ message: 'User logged in successfully', user });
-  } else {
-    res.status(401).json({ message: 'Invalid email or password' });
+(async function initializeDB() {
+  try {
+    db = await mysql.createConnection(dbConfig);
+    console.log('Connected to the database.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
+
+app.post('/signup', async (req, res) => {
+  const { username, password, address } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    const [result] = await db.execute(
+      'INSERT INTO users (username, password, address) VALUES (?, ?, ?)',
+      [username, hashedPassword, address]
+    );
+    res.status(201).send({ message: 'User created', userId: result.insertId });
+  } catch (error) {
+    res.status(500).send({ message: 'Error registering user', error: error.message });
   }
 });
 
-app.post('/scenario', (req, res) => {
-  const { scenario } = req.body;
-  // In a real application, you would trigger the actual smart home actions here
-  res.status(200).json({ message: `Scenario ${scenario} executed successfully` });
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const [users] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
+    if (users.length === 0) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+    const user = users[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      res.send({ message: 'Login successful' });
+    } else {
+      res.status(401).send({ message: 'Login failed' });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Error logging in', error: error.message });
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
