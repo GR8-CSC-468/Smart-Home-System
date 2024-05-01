@@ -1,14 +1,14 @@
 // Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
     });
-    const history = useHistory();
+    const navigate = useNavigate();  // use useNavigate instead of useHistory
 
     const handleChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
@@ -18,10 +18,12 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://clnodevm150-1.clemson.cloudlab.us/login', credentials);
-            alert('Login successful');
-            history.push('/dashboard'); // Redirect to dashboard on success
+            if (response.data) {
+                alert('Login successful');
+                navigate('/dashboard'); // Use navigate instead of history.push
+            }
         } catch (error) {
-            alert('Login failed: ' + error.response.data.message);
+            alert('Login failed: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
         }
     };
 

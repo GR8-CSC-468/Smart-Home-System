@@ -2,12 +2,18 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors');  // Ensure CORS is required
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Server port
 
-app.use(cors()); // Enables CORS
+// Enable CORS for all responses
+app.use(cors({
+  origin: '*', // Adjust according to your needs, '*' allows all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods to allow
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify headers to allow
+}));
+
 app.use(bodyParser.json()); // Parses JSON request bodies
 
 // Database connection settings
