@@ -14,7 +14,7 @@ function Signup() {
     e.preventDefault();
     try {
       // Replace with your actual signup API endpoint
-      const response = await axios.post('http://localhost:3000/signup', { email, password, address });
+      const response = await axios.post('http://10.43.248.34/signup', { email, password, address });
       if (response.status === 201) {
         // Redirect to login on successful signup
         history.push('/login');
