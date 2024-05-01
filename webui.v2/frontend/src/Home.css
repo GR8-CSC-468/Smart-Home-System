@@ -1,33 +1,43 @@
-/* Home.css */
 .home-container {
-  text-align: center;
-  margin-top: 100px;
-  background: url('https://example.com/futuristic-home-background.jpg') no-repeat center center fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 105vh;
+  background-image: url('./smart-home-login.png'); /* Ensure the path is correct */
   background-size: cover;
-  height: 100vh;
-  color: #fff;
+  background-position: center;
+}
+
+.content-box {
+  background-color: #ffffff; /* Light grey background for the outer box */
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+h1 {
+  margin-bottom: 20px; /* Adds space between the header and the buttons */
 }
 
 .button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 0; /* Removes additional bottom margin if any */
 }
 
 .button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  padding: 13px 30px;
+  background-color: #007bff; /* Blue background for buttons */
+  color: white;
   text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s;
+  border-radius: 16px;
+  margin-right: 20px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.button:last-child {
+  margin-right: 0;
 }
 
 .glow {
