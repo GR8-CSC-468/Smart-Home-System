@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,10 +20,9 @@ app.use(cors({
 app.use(bodyParser.json()); // Parses JSON request bodies
 
 // OpenAI configuration
-const openAIConfig = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || 'PastetheAPIkey',
 });
-const openai = new OpenAIApi(openAIConfig);
 
 // Database connection settings
 const dbConfig = {
