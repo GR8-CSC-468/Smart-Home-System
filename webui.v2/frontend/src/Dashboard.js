@@ -7,7 +7,7 @@ function Dashboard({ username }) {
   const urls = {
     lights: "https://maker.ifttt.com/trigger/Turn_On_Lights/with/key/c1jrdmi8rX__dtHpwBCPt",
     vacuum: "https://maker.ifttt.com/trigger/Cleaning-Has-Started/with/key/c1jrdmi8rX__dtHpwBCPt",
-    speak: "http://localhost:3000/speak"  
+    speak: "http://10.43.248.34/speak"  
   };
 
   const handleButtonClick = (url) => {
