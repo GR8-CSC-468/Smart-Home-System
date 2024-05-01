@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
+import axios from 'axios'; // Import Axios for making HTTP requests
 
 function Dashboard({ username }) {
   // Example URLs - replace with your actual URLs
@@ -9,8 +10,17 @@ function Dashboard({ username }) {
     speak: "http://example.com/speak"
   };
 
-  const openInNewTab = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+  const handleButtonClick = (url) => {
+    // Make a POST request to the URL
+    axios.post(url)
+      .then(response => {
+        console.log('Success:', response.data);
+        alert('Action successfully triggered!');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to trigger action. Please try again.');
+      });
   };
 
   return (
@@ -18,16 +28,12 @@ function Dashboard({ username }) {
       <div className="dashboard-header">
         <span>Welcome, {username}!</span>
       </div>
-      <div className="dashboard-body">
-        <div className="status-panel">
-          <h2>Status</h2>
-          <p>null</p>
-        </div>
+      <div className="dashboard-body centered">
         <div className="automation-panel">
           <h2>Automation</h2>
-          <button onClick={() => openInNewTab(urls.lights)}>Turn on the Lights</button>
-          <button onClick={() => openInNewTab(urls.vacuum)}>Vacuum</button>
-          <button onClick={() => openInNewTab(urls.speak)}>Speak</button>
+          <button onClick={() => handleButtonClick(urls.lights)}>Turn on the Lights</button>
+          <button onClick={() => handleButtonClick(urls.vacuum)}>Start the Vacuum</button>
+          <button onClick={() => handleButtonClick(urls.speak)}>Activate Speaker</button>
         </div>
       </div>
     </div>
