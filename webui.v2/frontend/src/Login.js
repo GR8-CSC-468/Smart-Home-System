@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://clnodevm150-1.clemson.cloudlab.us/login', credentials);
+            const response = await axios.post('http://localhost:3000/login', credentials);
             if (response.data) {
                 alert('Login successful');
                 navigate('/dashboard'); // Use navigate instead of history.push

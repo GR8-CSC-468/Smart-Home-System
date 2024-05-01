@@ -15,7 +15,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://clnodevm150-1.clemson.cloudlab.us/signup', formData);
+            const response = await axios.post('http://localhost:3000/signup', formData);
             alert(response.data.message);
         } catch (error) {
             alert('Signup failed: ' + error.response.data.message);

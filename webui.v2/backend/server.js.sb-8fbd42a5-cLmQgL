@@ -3,9 +3,6 @@ const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Server port
@@ -18,12 +15,6 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json()); // Parses JSON request bodies
-
-// OpenAI configuration
-const openAIConfig = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(openAIConfig);
 
 // Database connection settings
 const dbConfig = {
@@ -90,25 +81,6 @@ app.post('/login', async (req, res) => {
     }
   } catch (error) {
     res.status(500).send({ message: 'Error logging in', error: error.message });
-  }
-});
-
-// Speech endpoint
-app.get('/speak', async (req, res) => {
-  try {
-    const speechPath = path.resolve("./speech.mp3");
-    const mp3 = await openai.audio.speech.create({
-      model: "tts-1",
-      voice: "alloy",
-      input: "Today is a wonderful day to build something people love!",
-    });
-
-    const buffer = Buffer.from(await mp3.arrayBuffer());
-    await fs.promises.writeFile(speechPath, buffer);
-    res.send('Speech file created successfully at ' + speechPath);
-  } catch (error) {
-    console.error('Failed to create speech file:', error);
-    res.status(500).send({ message: 'Error creating speech file', error: error.message });
   }
 });
 
