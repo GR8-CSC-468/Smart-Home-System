@@ -1,6 +1,11 @@
+/* Home.css */
 .home-container {
   text-align: center;
   margin-top: 100px;
+  background: url('https://example.com/futuristic-home-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  color: #fff;
 }
 
 .button-container {
@@ -23,4 +28,8 @@
 
 .button:hover {
   background-color: #0056b3;
+}
+
+.glow {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
 }
