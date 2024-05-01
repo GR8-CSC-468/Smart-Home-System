@@ -1,0 +1,27 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dashboard-header {
+  padding: 10px;
+  background: #f0f0f0;
+  text-align: left;
+}
+
+.dashboard-body {
+  display: flex;
+  flex: 1;
+}
+
+.status-panel, .automation-panel {
+  flex: 1;
+  padding: 20px;
+}
+
+button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+}

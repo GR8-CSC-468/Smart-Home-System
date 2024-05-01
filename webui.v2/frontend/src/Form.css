@@ -1,0 +1,29 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.input-field {
+  margin: 10px 0;
+  width: 300px;
+  height: 40px;
+  padding: 8px;
+}
+
+.button {
+  width: 150px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link {
+  margin-top: 10px;
+  color: navy;
+  text-decoration: none;
+}

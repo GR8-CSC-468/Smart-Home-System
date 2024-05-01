@@ -1,0 +1,14 @@
+# Use the same Node.js base image
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8082
+CMD [ "node", "rng.js" ]
