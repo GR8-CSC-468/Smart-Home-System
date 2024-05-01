@@ -9,7 +9,7 @@ function Dashboard() {
     setScenario(selectedScenario);
     try {
       // Replace with your actual scenario API endpoint
-      const response = await axios.post('http://localhost:3000/scenario', { scenario: selectedScenario });
+      const response = await axios.post('http://10.43.248.34/scenario', { scenario: selectedScenario });
       if (response.status === 200) {
         // Play the audio file returned by the API
         const audio = new Audio(response.data.audioUrl);
