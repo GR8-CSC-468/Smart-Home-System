@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         env:
         - name: DB_HOST
-          value: "mysql-service.sqlserv.svc.cluster.local" 
+          value: "mysql-deployment.sqlserv.svc.cluster.local" 
         - name: DB_USER
           value: shms_user
         - name: DB_PASSWORD

@@ -18,7 +18,7 @@ app.use(bodyParser.json()); // Parses JSON request bodies
 
 // Database connection settings
 const dbConfig = {
-  host: process.env.DB_HOST || 'mysql-service.sqlserv.svc.cluster.local', // Use Kubernetes service DNS for DB host
+  host: process.env.DB_HOST || 'mysql-deployment.sqlserv.svc.cluster.local', // Use Kubernetes service DNS for DB host
   user: process.env.DB_USER || 'shms_user', // Match DB user from Dockerfile
   password: process.env.DB_PASSWORD || 'shms_password', // Match DB password from Dockerfile
   database: process.env.DB_NAME || 'shms_database' // Match DB name from Dockerfile
