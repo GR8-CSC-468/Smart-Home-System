@@ -15,9 +15,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: ighost007/custom-mysql:latest
-        ports:
-        - containerPort: 3306
+        image: mysql:5.7
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: "shms_password"
@@ -27,6 +25,8 @@ spec:
           value: "shms_user"
         - name: MYSQL_PASSWORD
           value: "shms_password"
+        ports:
+        - containerPort: 3306
         volumeMounts:
         - name: mysql-storage
           mountPath: /var/lib/mysql
