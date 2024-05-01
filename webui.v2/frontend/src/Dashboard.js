@@ -5,8 +5,8 @@ import axios from 'axios'; // Import Axios for making HTTP requests
 function Dashboard({ username }) {
   // Example URLs - replace with your actual URLs
   const urls = {
-    lights: "https://maker.ifttt.com/trigger/turn_lights/with/key/b9F_eA1hMb2duIm8d3fzJc0GXjaL_YVaaYv3c8TcSIx",
-    vacuum: "https://maker.ifttt.com/trigger/start_vacuum/with/key/b9F_eA1hMb2duIm8d3fzJc0GXjaL_YVaaYv3c8TcSIx",
+    lights: "https://maker.ifttt.com/trigger/Turn_On_Lights/with/key/c1jrdmi8rX__dtHpwBCPt",
+    vacuum: "https://maker.ifttt.com/trigger/Cleaning-Has-Started/with/key/c1jrdmi8rX__dtHpwBCPt",
     speak: "http://example.com/speak"
   };
 
