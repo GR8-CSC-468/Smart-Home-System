@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
+import './Login.css'; // Updated to use Login.css
 
-const Login = () => {
-    const [credentials, setCredentials] = useState({
-        username: '',
-        password: ''
-    });
-    const navigate = useNavigate();  // use useNavigate instead of useHistory
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setCredentials({...credentials, [e.target.name]: e.target.value});
-    };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/login', { email, password });
+      if (response.status === 200) {
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/login', credentials);
-            if (response.data) {
-                alert('Login successful');
-                navigate('/dashboard'); // Use navigate instead of history.push
-            }
-        } catch (error) {
-            alert('Login failed: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
-        }
-    };
+  const handleTemporaryAccess = () => {
+    navigate('/dashboard');
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="username" value={credentials.username} onChange={handleChange} placeholder="Username" required />
-            <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" required />
-            <button type="submit">Log In</button>
-        </form>
-    );
-};
+  return (
+    <div className="login-container">
+      <h2>Login</h2>
+      <form onSubmit={handleLogin} className="login-form">
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label>Password:</label>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Login</button>
+      </form>
+      <Link to="/signup" className="link">Don't have an account? Signup</Link>
+    </div>
+  );
+}
 
 export default Login;
