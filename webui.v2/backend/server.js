@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const cors = require('cors');  // Ensure CORS is required
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Server port
@@ -18,10 +18,10 @@ app.use(bodyParser.json()); // Parses JSON request bodies
 
 // Database connection settings
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'shms_database'
+  host: process.env.DB_HOST || 'mysql-service.sqlserv.svc.cluster.local', // Use Kubernetes service DNS for DB host
+  user: process.env.DB_USER || 'shms_user', // Match DB user from Dockerfile
+  password: process.env.DB_PASSWORD || 'shms_password', // Match DB password from Dockerfile
+  database: process.env.DB_NAME || 'shms_database' // Match DB name from Dockerfile
 };
 
 // Initialize database connection

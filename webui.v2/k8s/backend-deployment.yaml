@@ -20,12 +20,12 @@ spec:
         - containerPort: 3000
         env:
         - name: DB_HOST
-          value: mysql-service.mysql-space
+          value: "mysql-service.sqlserv.svc.cluster.local" 
         - name: DB_USER
-          value: shms_admin
+          value: shms_user
         - name: DB_PASSWORD
           value: shms_password
         - name: DB_NAME
-          value: shms_db
+          value: shms_database
         - name: PORT
           value: "3000"
