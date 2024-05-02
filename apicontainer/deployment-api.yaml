@@ -1,45 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-service
-  labels:
-    app: api-service
+  name: fastapi-service
+  namespace: webuiv2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-service
+      app: fastapi-service
   template:
     metadata:
       labels:
-        app: api-service
+        app: fastapi-service
     spec:
       containers:
-      - name: api-service
-        image: ighost007/smart-home-api:latest
+      - name: fastapi
+        image: ighost007/fastapi:latest
         ports:
         - containerPort: 5000
         env:
         - name: DB_HOST
-          value: "shms-database-service"
-        - name: DB_PORT
-          value: "3306"
+          value: "10.43.190.3""  # DNS of the MySQL service in the Kubernetes cluster
         - name: DB_USER
-          value: "shms_user"
+          value: "shms_user"  # MySQL user
         - name: DB_PASSWORD
-          value: "shms_password"
+          value: "shms_password"  # MySQL password
         - name: DB_NAME
-          value: "shms_database"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: api-service
-spec:
-  selector:
-    app: api-service
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000
+          value: "shms_database"  # MySQL database name
