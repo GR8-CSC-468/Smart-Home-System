@@ -70,21 +70,13 @@ app.post('/signup', async (req, res) => {
 
 // Login endpoint
 app.post('/login', async (req, res) => {
-  const { username, email, password } = req.body;
-  if ((!username && !email) || !password) {
-    return res.status(400).send({ message: 'Username or email and password are required' });
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send({ message: 'Username and password are required' });
   }
 
   try {
-    let users;
-    if (username) {
-      // Check by username
-      [users] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
-    } else {
-      // Check by email
-      [users] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
-    }
-
+    const [users] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
     if (users.length === 0) {
       return res.status(404).send({ message: 'User not found' });
     }
