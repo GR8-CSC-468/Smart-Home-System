@@ -20,7 +20,7 @@ spec:
         - containerPort: 5000
         env:
         - name: DB_HOST
-          value: "10.43.190.3""  # DNS of the MySQL service in the Kubernetes cluster
+          value: "10.43.190.3"
         - name: DB_USER
           value: "shms_user"  # MySQL user
         - name: DB_PASSWORD
