@@ -4,16 +4,17 @@ import axios from 'axios';
 import './Login.css'; // Import custom CSS file for styling
 
 function Login() {
-  const [username, setUsername] = useState('');  // Changed to username
+  const [username, setUsername] = useState('');  // Use username state
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // Make sure to pass username and password to your API
       const response = await axios.post('http://10.43.248.34/login', { username, password });
       if (response.status === 200) {
-        navigate('/dashboard');
+        navigate('/dashboard'); // Navigate to dashboard if login is successful
       }
     } catch (error) {
       console.error('Login failed:', error);
