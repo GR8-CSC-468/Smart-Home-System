@@ -10,6 +10,8 @@ CREATE TABLE Users (
  UserRole ENUM('admin', 'user') DEFAULT 'user'
 );
 
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'shms_password' WITH GRANT OPTION;
+
 CREATE TABLE Devices (
  DeviceID INT AUTO_INCREMENT PRIMARY KEY,
  DeviceName VARCHAR(255) NOT NULL,
