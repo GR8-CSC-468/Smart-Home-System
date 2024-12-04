@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: mysql-space   
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql-space
+  template:
+    metadata:
+      labels:
+        app: mysql-space
+    spec:
+      containers:
+      - name: sql-shms
+        image: swelb/sql-image:1.0
+        ports:
+        - containerPort: 3306

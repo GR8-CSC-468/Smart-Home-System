@@ -1,0 +1,24 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shms-frontend
+  namespace: webuiv2
+  labels:
+    app: shms-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shms-frontend
+  template:
+    metadata:
+      labels:
+        app: shms-frontend
+    spec:
+      containers:
+      - name: shms-frontend
+        image: ighost007/shms-frontend:latest  # Update the image name here
+        ports:
+        - containerPort: 80
+        

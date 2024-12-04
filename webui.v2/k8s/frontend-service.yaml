@@ -1,0 +1,14 @@
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: shms-frontend
+  namespace: webuiv2
+spec:
+  selector:
+    app: shms-frontend  # This should match the label in your deployment
+  type: LoadBalancer   # This type exposes the service outside of the cluster
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80  # The container port in your frontend deployment

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  worker:
+    build: ./worker
+    ports:
+      - "8080:8080"
+  hasher:
+    build: ./hasher
+    ports:
+      - "8081:8081"
+  rng:
+    build: ./rng
+    ports:
+      - "8082:8082"

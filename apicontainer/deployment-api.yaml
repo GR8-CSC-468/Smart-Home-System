@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-service
+  namespace: webuiv2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-service
+  template:
+    metadata:
+      labels:
+        app: fastapi-service
+    spec:
+      containers:
+      - name: fastapi
+        image: ighost007/fastapi:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DB_HOST
+          value: "10.43.190.3"
+        - name: DB_USER
+          value: "shms_user"  # MySQL user
+        - name: DB_PASSWORD
+          value: "shms_password"  # MySQL password
+        - name: DB_NAME
+          value: "shms_database"  # MySQL database name

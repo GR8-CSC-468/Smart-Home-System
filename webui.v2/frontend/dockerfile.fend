@@ -1,0 +1,24 @@
+# Stage 1: Build the React application
+FROM node:latest as build-stage
+WORKDIR /app
+
+# Copy package.json and package-lock.json from the frontend directory
+COPY frontend/package*.json ./
+
+# Install npm dependencies
+RUN npm install
+
+# Copy the frontend source code (excluding node_modules and potentially other files as defined in .dockerignore)
+COPY frontend/ .
+
+# Copy the public directory from the correct location
+COPY app/public /app/public
+
+# Build the frontend static files
+RUN npm run build
+
+# Stage 2: Serve the frontend static files with Nginx
+FROM nginx:alpine
+COPY --from=build-stage /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,17 @@
+# Use the official Python image that includes Uvicorn, an ASGI server
+FROM python:3.9-slim
+
+# Set the working directory in the Docker container
+WORKDIR /app
+
+# Copy the application files and requirements file into the container
+COPY . .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port Uvicorn will run on
+EXPOSE 5000
+
+# Run the application using Uvicorn
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]

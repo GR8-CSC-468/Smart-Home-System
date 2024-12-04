@@ -1,0 +1,19 @@
+{
+  "name": "shms-backend",
+  "version": "1.0.0",
+  "description": "Backend for Smart Home Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "mysql2": "^2.3.0",
+    "bcrypt": "^5.0.1",
+    "openai": "^4.40.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,53 @@
+/* Dashboard.css */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #36d1dc, #5b86e5);
+  color: #fff;
+}
+
+.dashboard-header {
+  padding: 10px;
+  background: #f0f0f0;
+  color: #333;
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.centered {
+  text-align: center;
+}
+
+.automation-panel {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+button {
+  display: block;
+  margin: 10px auto; /* Center button in the block */
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

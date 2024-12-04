@@ -1,0 +1,45 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 105vh;
+  background-image: url('./smart-home-login.png'); /* Ensure the path is correct */
+  background-size: cover;
+  background-position: center;
+}
+
+.content-box {
+  background-color: #ffffff; /* Light grey background for the outer box */
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+h1 {
+  margin-bottom: 20px; /* Adds space between the header and the buttons */
+}
+
+.button-container {
+  margin-bottom: 0; /* Removes additional bottom margin if any */
+}
+
+.button {
+  padding: 13px 30px;
+  background-color: #007bff; /* Blue background for buttons */
+  color: white;
+  text-decoration: none;
+  border-radius: 16px;
+  margin-right: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:last-child {
+  margin-right: 0;
+}
+
+.glow {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+}

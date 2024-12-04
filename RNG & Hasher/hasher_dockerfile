@@ -1,0 +1,14 @@
+# Use the same Node.js base image
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8081
+CMD [ "node", "hasher.js" ]

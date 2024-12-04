@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shms-backend
+  namespace: webuiv2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shms-backend
+  template:
+    metadata:
+      labels:
+        app: shms-backend
+    spec:
+      containers:
+      - name: shms-backend
+        image: ighost007/shms-backend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: "10.43.190.3" 
+        - name: DB_USER
+          value: shms_user
+        - name: DB_PASSWORD
+          value: shms_password
+        - name: DB_NAME
+          value: shms_database
+        - name: PORT
+          value: "3000"
